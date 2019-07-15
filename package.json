@@ -52,7 +52,7 @@
     "clipboardy": "^2.0.0",
     "immutable": "^4.0.0-rc.12",
     "keytar": "^4.4.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
