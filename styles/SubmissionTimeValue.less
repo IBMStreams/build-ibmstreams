@@ -1,0 +1,67 @@
+.stvHover{
+  &:hover{
+    opacity: 0.6;
+  }
+}
+.Collapsible__trigger {
+
+  &:hover{
+    opacity: 0.6;
+  }
+
+  &:after {
+    content: '>';
+    font-weight: bold;
+    position: relative;
+    bottom: 22px;
+    right: 2%;
+    float: right;
+    font-size: large;
+    transition: transform 300ms;
+  }
+
+  &.is-open {
+    &:after {
+      transform: rotateZ(90deg);
+    }
+  }
+}
+
+.svtH3{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.inputDivStyle {
+  margin-left: 15px;
+  padding-bottom: 2px;
+}
+
+.inputSyle {
+  border-radius: 2px;
+  margin-top: 5px;
+  border: 1px solid #333333;
+  padding-left: 5px;
+  width: 530px
+}
+.inputDivOddStyle {
+  clear: left
+}
+.buttonStyle {
+  margin: 5px;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+.submitButtonStyle {
+  margin: 5px;
+  margin-top: 20px;
+}
+.formStyle {
+  overflow: auto;
+  max-height: 80vh;
+}
+.h2Style {
+  margin: 0px;
+  padding-top: 20px;
+  font-size: 1.5em;
+}

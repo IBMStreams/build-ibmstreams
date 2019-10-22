@@ -52,6 +52,8 @@
     "@types/rx-dom": "^7.0.0",
     "@types/rx-node": "^0.0.5",
     "archiver": "^3.0.0",
+    "carbon-components": "^10.4.1",
+    "carbon-components-react": "^7.4.1",
     "chai": "^4.2.0",
     "clipboardy": "^2.0.0",
     "extract-zip": "^1.6.7",
@@ -63,6 +65,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
+    "react-collapsible": "^2.6.0",
     "react-dom": "^16.8.6",
     "react-loading": "^2.0.3",
     "react-redux": "^7.0.1",
@@ -73,6 +76,7 @@
     "reselect": "^4.0.0",
     "rxjs": "^6.3.2",
     "semver": "^6.0.0",
+    "tar-fs": "^2.0.0",
     "xmldoc": "^1.1.2"
   },
   "devDependencies": {
@@ -102,7 +106,5 @@
     "redux-devtools-extension": "^2.13.8",
     "remote-redux-devtools": "^0.5.16",
     "remotedev-server": "^0.3.1",
-    "extract-zip": "^1.6.7",
-    "fs-extra": "^8.0.1"
   }
 }
