@@ -203,7 +203,7 @@ describe('async submission epics', () => {
     });
     it('should handle success', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
         bundles: [{ bundlePath: 'testing' }],
       });
       spyOn(StatusUtils, 'submitJobStart').andReturn(1);
@@ -221,7 +221,7 @@ describe('async submission epics', () => {
     });
     it('should handle failure if StatusUtils.submitJob fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
         bundles: [{ bundlePath: 'testing' }],
       });
       spyOn(StatusUtils, 'submitJobStart').andCallFake(() => {
@@ -236,7 +236,7 @@ describe('async submission epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
           bundles: [{ bundlePath: 'testing' }],
         },
         error: new Error()
@@ -248,7 +248,7 @@ describe('async submission epics', () => {
     });
     it('should handle failure if StreamsRestUtils.artifact.uploadApplicationBundleToInstance fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
         bundles: [{ bundlePath: 'testing' }],
       });
       spyOn(StatusUtils, 'submitJobStart').andReturn(1);
@@ -263,7 +263,7 @@ describe('async submission epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
           bundles: [{ bundlePath: 'testing' }],
         },
         error: new Error()
@@ -275,7 +275,7 @@ describe('async submission epics', () => {
     });
     it('should handle failure if ResponseSelector.getUploadedBundleId fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
         bundles: [{ bundlePath: 'testing' }],
       });
       spyOn(StatusUtils, 'submitJobStart').andReturn(1);
@@ -290,7 +290,7 @@ describe('async submission epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
           bundles: [{ bundlePath: 'testing' }],
         },
         error: new Error()
@@ -302,7 +302,7 @@ describe('async submission epics', () => {
     });
     it('should handle failure if StreamsRestUtils.asyncSubmissions.submitJob fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
         bundles: [{ bundlePath: 'testing' }],
       });
       spyOn(StatusUtils, 'submitJobStart').andReturn(1);
@@ -317,7 +317,7 @@ describe('async submission epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
           bundles: [{ bundlePath: 'testing' }],
         },
         error: new Error()
@@ -329,7 +329,7 @@ describe('async submission epics', () => {
     });
     it('should handle failure if ResponseSelector.getSubmitInfo fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
         bundles: [{ bundlePath: 'testing' }],
       });
       spyOn(StatusUtils, 'submitJobStart').andReturn(1);
@@ -344,7 +344,7 @@ describe('async submission epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
           bundles: [{ bundlePath: 'testing' }],
         },
         error: new Error()
@@ -356,7 +356,7 @@ describe('async submission epics', () => {
     });
     it('should handle failure if StatusUtils.jobSubmitted fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
         bundles: [{ bundlePath: 'testing' }],
       });
       spyOn(StatusUtils, 'submitJobStart').andReturn(1);
@@ -371,7 +371,7 @@ describe('async submission epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+          type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
           bundles: [{ bundlePath: 'testing' }],
         },
         error: new Error()

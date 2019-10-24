@@ -46,14 +46,14 @@ describe('Actions', () => {
       expect(actions.submitStatusReceived(id)).toEqual(expectedOutput);
     });
   });
-  describe('submitApplicationsFromBundleFilesAsync', () => {
+  describe('submitApplicationsFromBundleFiles', () => {
     it('should create a submit application from bundle file async action', () => {
       const bundles = ['test'];
       expectedOutput = {
-        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+        type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
         bundles
       };
-      expect(actions.submitApplicationsFromBundleFilesAsync(bundles)).toEqual(expectedOutput);
+      expect(actions.submitApplicationsFromBundleFiles(bundles)).toEqual(expectedOutput);
     });
   });
 });

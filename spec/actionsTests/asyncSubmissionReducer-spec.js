@@ -21,9 +21,9 @@ describe('async submission reducers', () => {
       }
     }
   };
-  it('should handle SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC', () => {
+  it('should handle SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES', () => {
     action = {
-      type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES_ASYNC,
+      type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
       bundles: '001'
     };
     state = rootReducer(state, action);

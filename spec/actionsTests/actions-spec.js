@@ -99,16 +99,16 @@ describe('Actions', () => {
       expect(actions.queueAction(queuedAction)).toEqual(expectedOutput);
     });
   });
-  describe('checkIcp4dHostExists', () => {
+  describe('checkHostExists', () => {
     it('should create an action to set the successFn and errorFn', () => {
       const successFn = () => {};
       const errorFn = () => {};
       expectedOutput = {
-        type: actions.actions.CHECK_ICP4D_HOST_EXISTS,
+        type: actions.actions.CHECK_HOST_EXISTS,
         successFn,
         errorFn
       };
-      expect(actions.checkIcp4dHostExists(successFn, errorFn)).toEqual(expectedOutput);
+      expect(actions.checkHostExists(successFn, errorFn)).toEqual(expectedOutput);
     });
   });
   describe('authenticateIcp4d', () => {
@@ -125,14 +125,14 @@ describe('Actions', () => {
       expect(actions.authenticateIcp4d(username, password, rememberPassword)).toEqual(expectedOutput);
     });
   });
-  describe('authenticateStreamsInstance', () => {
+  describe('authenticateIcp4dStreamsInstance', () => {
     it('should create an action to authenticate the streams instance name', () => {
       const instanceName = 'test';
       expectedOutput = {
-        type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE,
+        type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE,
         instanceName
       };
-      expect(actions.authenticateStreamsInstance(instanceName)).toEqual(expectedOutput);
+      expect(actions.authenticateIcp4dStreamsInstance(instanceName)).toEqual(expectedOutput);
     });
   });
   describe('setStreamsInstances', () => {
@@ -347,14 +347,14 @@ describe('Actions', () => {
       expect(actions.getBuildArtifactsFulfilled(buildId, artifacts)).toEqual(expectedOutput);
     });
   });
-  describe('downloadAppBundles', () => {
+  describe('downloadBuildArtifacts', () => {
     it('should create an action to download the application bundles', () => {
       const buildId = '001';
       expectedOutput = {
-        type: actions.actions.DOWNLOAD_APP_BUNDLES,
+        type: actions.actions.DOWNLOAD_BUILD_ARTIFACTS,
         buildId
       };
-      expect(actions.downloadAppBundles(buildId)).toEqual(expectedOutput);
+      expect(actions.downloadBuildArtifacts(buildId)).toEqual(expectedOutput);
     });
   });
   describe('submitApplications', () => {

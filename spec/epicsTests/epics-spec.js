@@ -617,7 +617,7 @@ describe('Epics', () => {
     });
     it('should handle success', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.DOWNLOAD_APP_BUNDLES,
+        type: actions.actions.DOWNLOAD_BUILD_ARTIFACTS,
         buildId: '001',
       });
       spyOn(StreamsRestUtils.artifact, 'downloadApplicationBundle').andReturn(ActionsObservable.of({ body: 'testing' }));
@@ -625,7 +625,7 @@ describe('Epics', () => {
       spyOn(StateSelector, 'getOutputArtifactFilePath').andReturn(`${__dirname}/output/artifact`);
       spyOn(StatusUtils, 'appBundleDownloaded').andReturn(1);
       const state = getState$(store);
-      const expectedOutput = { type: actions.actions.POST_DOWNLOAD_ARTIFACTS, };
+      const expectedOutput = { type: actions.actions.POST_DOWNLOAD_BUILD_ARTIFACTS, };
       rootEpic(action, state)
         .subscribe((output) => {
           expect(output).toEqual(expectedOutput);
@@ -633,7 +633,7 @@ describe('Epics', () => {
     });
     it('should handle failure if StateSelector.getBuildArtifacts fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.DOWNLOAD_APP_BUNDLES,
+        type: actions.actions.DOWNLOAD_BUILD_ARTIFACTS,
         buildId: '001',
       });
       spyOn(StreamsRestUtils.artifact, 'downloadApplicationBundle').andReturn(ActionsObservable.of({ body: 'testing' }));
@@ -651,7 +651,7 @@ describe('Epics', () => {
     });
     it('should handle failure if StreamsRestUtils.artifact.downloadApplicationBundle fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.DOWNLOAD_APP_BUNDLES,
+        type: actions.actions.DOWNLOAD_BUILD_ARTIFACTS,
         buildId: '001',
       });
       spyOn(StreamsRestUtils.artifact, 'downloadApplicationBundle').andCallFake(() => {
@@ -664,7 +664,7 @@ describe('Epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.DOWNLOAD_APP_BUNDLES,
+          type: actions.actions.DOWNLOAD_BUILD_ARTIFACTS,
           buildId: '001',
         },
         error: new Error()
@@ -676,7 +676,7 @@ describe('Epics', () => {
     });
     it('should handle failure if StateSelector.getOutputArtifactFilePath fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.DOWNLOAD_APP_BUNDLES,
+        type: actions.actions.DOWNLOAD_BUILD_ARTIFACTS,
         buildId: '001',
       });
       spyOn(StreamsRestUtils.artifact, 'downloadApplicationBundle').andReturn(ActionsObservable.of({ body: 'testing' }));
@@ -689,7 +689,7 @@ describe('Epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.DOWNLOAD_APP_BUNDLES,
+          type: actions.actions.DOWNLOAD_BUILD_ARTIFACTS,
           buildId: '001',
         },
         error: new Error()
@@ -701,7 +701,7 @@ describe('Epics', () => {
     });
     it('should handle failure if StatusUtils.appBundleDownloaded fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.DOWNLOAD_APP_BUNDLES,
+        type: actions.actions.DOWNLOAD_BUILD_ARTIFACTS,
         buildId: '001',
       });
       spyOn(StreamsRestUtils.artifact, 'downloadApplicationBundle').andReturn(ActionsObservable.of({ body: 'testing' }));
@@ -711,7 +711,7 @@ describe('Epics', () => {
         throw new Error('testing');
       });
       const state = getState$(store);
-      const expectedOutput = { type: actions.actions.POST_DOWNLOAD_ARTIFACTS, };
+      const expectedOutput = { type: actions.actions.POST_DOWNLOAD_BUILD_ARTIFACTS, };
       rootEpic(action, state)
         .subscribe((output) => {
           expect(output).toEqual(expectedOutput);
@@ -1124,13 +1124,13 @@ describe('Epics', () => {
     });
     it('should handle success', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.CHECK_ICP4D_HOST_EXISTS,
+        type: actions.actions.CHECK_HOST_EXISTS,
         successFn: () => 1,
         errorFn: () => 1
       });
       spyOn(StreamsRestUtils.icp4d, 'icp4dHostExists').andReturn(action);
       const state = getState$(store);
-      const expectedOutput = { type: actions.actions.POST_CHECK_ICP4D_HOST_EXISTS, };
+      const expectedOutput = { type: actions.actions.POST_CHECK_HOST_EXISTS, };
       rootEpic(action, state)
         .subscribe((output) => {
           expect(output).toEqual(expectedOutput);
@@ -1138,7 +1138,7 @@ describe('Epics', () => {
     });
     it('should handle failure if StreamsRestUtils.icp4d.icp4dHostExists fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.CHECK_ICP4D_HOST_EXISTS,
+        type: actions.actions.CHECK_HOST_EXISTS,
         successFn: () => 1,
         errorFn: () => 1
       });
@@ -1363,7 +1363,7 @@ describe('Epics', () => {
     });
     it('should handle success', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE,
+        type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE,
         instanceName: 'testInstance',
       });
       spyOn(StreamsRestUtils.icp4d, 'getStreamsAuthToken').andReturn(action);
@@ -1378,7 +1378,7 @@ describe('Epics', () => {
         { type: actions.actions.REFRESH_TOOLKITS },
         action,
         { type: actions.actions.CLEAR_QUEUED_ACTION },
-        { type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE, instanceName: 'testInstance' }
+        { type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE, instanceName: 'testInstance' }
       ];
       let i = 0;
       rootEpic(action, state)
@@ -1389,7 +1389,7 @@ describe('Epics', () => {
     });
     it('should handle failure if StreamsRestUtils.icp4d.getStreamsAuthToken fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE,
+        type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE,
         instanceName: 'testInstance',
       });
       spyOn(StreamsRestUtils.icp4d, 'getStreamsAuthToken').andCallFake(() => {
@@ -1408,7 +1408,7 @@ describe('Epics', () => {
     });
     it('should handle failure if Status code is not 200', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE,
+        type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE,
         instanceName: 'testInstance',
       });
       spyOn(StreamsRestUtils.icp4d, 'getStreamsAuthToken').andReturn(action);
@@ -1425,7 +1425,7 @@ describe('Epics', () => {
     });
     it('should handle failure if ResponseSelector.getStatusCode fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE,
+        type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE,
         instanceName: 'testInstance',
       });
       spyOn(StreamsRestUtils.icp4d, 'getStreamsAuthToken').andReturn(action);
@@ -1439,7 +1439,7 @@ describe('Epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE,
+          type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE,
           instanceName: 'testInstance',
         },
         error: new Error()
@@ -1451,7 +1451,7 @@ describe('Epics', () => {
     });
     it('should handle failure if StateSelector.getQueuedAction fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE,
+        type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE,
         instanceName: 'testInstance',
       });
       spyOn(StreamsRestUtils.icp4d, 'getStreamsAuthToken').andReturn(action);
@@ -1465,7 +1465,7 @@ describe('Epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE,
+          type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE,
           instanceName: 'testInstance',
         },
         error: new Error()
@@ -1477,7 +1477,7 @@ describe('Epics', () => {
     });
     it('should handle failure if ResponseSelector.getStreamsAuthToken fails', () => {
       const action = ActionsObservable.of({
-        type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE,
+        type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE,
         instanceName: 'testInstance',
       });
       spyOn(StreamsRestUtils.icp4d, 'getStreamsAuthToken').andReturn(action);
@@ -1491,7 +1491,7 @@ describe('Epics', () => {
       const expectedOutput = {
         type: actions.actions.ERROR,
         sourceAction: {
-          type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE,
+          type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE,
           instanceName: 'testInstance',
         },
         error: new Error()
@@ -1582,7 +1582,7 @@ describe('Epics', () => {
       });
       spyOn(StateSelector, 'getSelectedInstanceName').andReturn('testInstance');
       const state = getState$(store);
-      const expectedOutput = { type: actions.actions.AUTHENTICATE_STREAMS_INSTANCE, instanceName: 'testInstance' };
+      const expectedOutput = { type: actions.actions.AUTHENTICATE_ICP4D_STREAMS_INSTANCE, instanceName: 'testInstance' };
       rootEpic(action, state)
         .subscribe((output) => {
           expect(output).toEqual(expectedOutput);
