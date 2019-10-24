@@ -1,6 +1,6 @@
 'use babel';
 
-import * as _ from 'lodash';
+import { omit as _omit } from 'lodash';
 import * as actions from '../../lib/actions/index';
 import rootReducer from '../../lib/reducers/index';
 
@@ -213,7 +213,7 @@ describe('reducer', () => {
         type: actions.actions.RESET_AUTH
       };
       const state2 = rootReducer(state, action);
-      const expectedState2 = { streamsV5Build: { ..._.omit(expectedState.streamsV5Build, ['currentLoginStep', 'icp4dAuthToken', 'icp4dAuthError', 'streamsInstances', 'selectedInstance', 'streamsAuthError', 'username']), currentLoginStep: 1 } };
+      const expectedState2 = { streamsV5Build: { ..._omit(expectedState.streamsV5Build, ['currentLoginStep', 'icp4dAuthToken', 'icp4dAuthError', 'streamsInstances', 'selectedInstance', 'streamsAuthError', 'username']), currentLoginStep: 1 } };
       expect(state2).toEqual(expectedState2);
     });
     it('should handle NEW_BUILD', () => {

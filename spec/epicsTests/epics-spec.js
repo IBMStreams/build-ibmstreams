@@ -1115,7 +1115,7 @@ describe('Epics', () => {
         });
     });
   });
-  describe('icp4dHostExistsEpic', () => {
+  describe('hostExistsEpic', () => {
     let store = {};
     beforeEach(() => {
       const epicMiddleware = createEpicMiddleware();
@@ -1128,7 +1128,7 @@ describe('Epics', () => {
         successFn: () => 1,
         errorFn: () => 1
       });
-      spyOn(StreamsRestUtils.icp4d, 'icp4dHostExists').andReturn(action);
+      spyOn(StreamsRestUtils, 'hostExists').andReturn(action);
       const state = getState$(store);
       const expectedOutput = { type: actions.actions.POST_CHECK_HOST_EXISTS, };
       rootEpic(action, state)
@@ -1136,13 +1136,13 @@ describe('Epics', () => {
           expect(output).toEqual(expectedOutput);
         });
     });
-    it('should handle failure if StreamsRestUtils.icp4d.icp4dHostExists fails', () => {
+    it('should handle failure if StreamsRestUtils.hostExists fails', () => {
       const action = ActionsObservable.of({
         type: actions.actions.CHECK_HOST_EXISTS,
         successFn: () => 1,
         errorFn: () => 1
       });
-      spyOn(StreamsRestUtils.icp4d, 'icp4dHostExists').andCallFake(() => {
+      spyOn(StreamsRestUtils, 'hostExists').andCallFake(() => {
         throw new Error();
       });
       const state = getState$(store);

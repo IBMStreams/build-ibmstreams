@@ -1,6 +1,5 @@
 'use babel';
 
-import * as _ from 'lodash';
 import * as actions from '../../lib/actions/index';
 import rootReducer from '../../lib/reducers/index';
 
