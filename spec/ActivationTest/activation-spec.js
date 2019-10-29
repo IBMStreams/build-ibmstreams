@@ -1,6 +1,6 @@
 'use babel';
 
-//import { expect } from 'chai';
+// import { expect } from 'chai';
 // import * as atom from "atom";
 
 

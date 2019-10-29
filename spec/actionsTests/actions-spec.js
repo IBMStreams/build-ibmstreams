@@ -145,7 +145,7 @@ describe('Actions', () => {
       expect(actions.setStreamsInstances(streamsInstances)).toEqual(expectedOutput);
     });
   });
-  describe('setSelectedInstance', () => {
+  describe('setSelectedCp4dStreamsInstance', () => {
     it('should create an action to set the selected streams instance', () => {
       const streamsInstance = { name: 'test' };
       expectedOutput = {
@@ -153,7 +153,7 @@ describe('Actions', () => {
         ...streamsInstance,
         currentLoginStep: 3
       };
-      expect(actions.setSelectedInstance(streamsInstance)).toEqual(expectedOutput);
+      expect(actions.setSelectedCp4dStreamsInstance(streamsInstance)).toEqual(expectedOutput);
     });
   });
   describe('setIcp4dAuthToken', () => {

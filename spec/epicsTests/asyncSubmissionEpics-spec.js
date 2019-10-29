@@ -41,8 +41,8 @@ describe('async submission epics', () => {
         id: '001',
       });
       spyOn(ResponseSelector, 'getSubmitStatus').andReturn({ status: 'test', id: '001' });
-      spyOn(StreamsRestUtils.asyncSubmissions, 'getJobSubmission').andReturn(action);
-      spyOn(StreamsRestUtils.asyncSubmissions, 'getSubmissionLogMessages').andReturn(ActionsObservable.of({ body: 'test' }));
+      spyOn(StreamsRestUtils.submit, 'getJobSubmission').andReturn(action);
+      spyOn(StreamsRestUtils.submit, 'getSubmissionLogMessages').andReturn(ActionsObservable.of({ body: 'test' }));
       const state = getState$(store);
       const expectedOutput = [{ type: actions.actions.GET_SUBMIT_STATUS_FULFILLED, status: 'test', id: '001' }, { type: actions.actions.GET_SUBMIT_LOG_MESSAGES_FULFILLED, id: '001', logMessages: ['test'] }, { type: actions.actions.SUBMIT_STATUS_RECEIVED, id: '001' }];
       let i = 0;
@@ -52,16 +52,16 @@ describe('async submission epics', () => {
           i += 1;
         });
     });
-    it('should handle failure if StreamsRestUtils.asyncSubmissions.getJobSubmission fails', () => {
+    it('should handle failure if StreamsRestUtils.submit.getJobSubmission fails', () => {
       const action = ActionsObservable.of({
         type: actions.actions.GET_SUBMIT_STATUS,
         id: '001',
       });
       spyOn(ResponseSelector, 'getSubmitStatus').andReturn({ status: 'test', id: '001' });
-      spyOn(StreamsRestUtils.asyncSubmissions, 'getJobSubmission').andCallFake(() => {
+      spyOn(StreamsRestUtils.submit, 'getJobSubmission').andCallFake(() => {
         throw new Error();
       });
-      spyOn(StreamsRestUtils.asyncSubmissions, 'getSubmissionLogMessages').andReturn(ActionsObservable.of({ body: 'test' }));
+      spyOn(StreamsRestUtils.submit, 'getSubmissionLogMessages').andReturn(ActionsObservable.of({ body: 'test' }));
       const state = getState$(store);
       const expectedOutput = { type: actions.actions.ERROR, sourceAction: action, error: new Error() };
       rootEpic(action, state)
@@ -69,14 +69,14 @@ describe('async submission epics', () => {
           expect(output).toEqual(expectedOutput);
         });
     });
-    it('should handle failure if StreamsRestUtils.asyncSubmissions.getSubmissionLogMessages fails', () => {
+    it('should handle failure if StreamsRestUtils.submit.getSubmissionLogMessages fails', () => {
       const action = ActionsObservable.of({
         type: actions.actions.GET_SUBMIT_STATUS,
         id: '001',
       });
       spyOn(ResponseSelector, 'getSubmitStatus').andReturn({ status: 'test', id: '001' });
-      spyOn(StreamsRestUtils.asyncSubmissions, 'getJobSubmission').andReturn(action);
-      spyOn(StreamsRestUtils.asyncSubmissions, 'getSubmissionLogMessages').andCallFake(() => {
+      spyOn(StreamsRestUtils.submit, 'getJobSubmission').andReturn(action);
+      spyOn(StreamsRestUtils.submit, 'getSubmissionLogMessages').andCallFake(() => {
         throw new Error();
       });
       const state = getState$(store);
@@ -94,8 +94,8 @@ describe('async submission epics', () => {
       spyOn(ResponseSelector, 'getSubmitStatus').andCallFake(() => {
         throw new Error();
       });
-      spyOn(StreamsRestUtils.asyncSubmissions, 'getJobSubmission').andReturn(action);
-      spyOn(StreamsRestUtils.asyncSubmissions, 'getSubmissionLogMessages').andReturn(ActionsObservable.of({ body: 'test' }));
+      spyOn(StreamsRestUtils.submit, 'getJobSubmission').andReturn(action);
+      spyOn(StreamsRestUtils.submit, 'getSubmissionLogMessages').andReturn(ActionsObservable.of({ body: 'test' }));
       const state = getState$(store);
       const expectedOutput = [{
         type: actions.actions.ERROR,
@@ -118,8 +118,8 @@ describe('async submission epics', () => {
         id: '001',
       });
       spyOn(ResponseSelector, 'getSubmitStatus').andReturn({ status: 'test', id: '001' });
-      spyOn(StreamsRestUtils.asyncSubmissions, 'getJobSubmission').andReturn(action);
-      spyOn(StreamsRestUtils.asyncSubmissions, 'getSubmissionLogMessages').andReturn(ActionsObservable.of({ test: 'test' }));
+      spyOn(StreamsRestUtils.submit, 'getJobSubmission').andReturn(action);
+      spyOn(StreamsRestUtils.submit, 'getSubmissionLogMessages').andReturn(ActionsObservable.of({ test: 'test' }));
       const state = getState$(store);
       const expectedOutput = [{ type: actions.actions.GET_SUBMIT_STATUS_FULFILLED, status: 'test', id: '001' }, {
         type: actions.actions.ERROR,
@@ -209,7 +209,7 @@ describe('async submission epics', () => {
       spyOn(StatusUtils, 'submitJobStart').andReturn(1);
       spyOn(StreamsRestUtils.artifact, 'uploadApplicationBundleToInstance').andReturn(action);
       spyOn(ResponseSelector, 'getUploadedBundleId').andReturn('test');
-      spyOn(StreamsRestUtils.asyncSubmissions, 'submitJobAsync').andReturn(action);
+      spyOn(StreamsRestUtils.submit, 'submitJob').andReturn(action);
       spyOn(ResponseSelector, 'getSubmitInfo').andReturn({ id: '001' });
       spyOn(StatusUtils, 'jobSubmitted').andReturn(1);
       const state = getState$(store);
@@ -229,7 +229,7 @@ describe('async submission epics', () => {
       });
       spyOn(StreamsRestUtils.artifact, 'uploadApplicationBundleToInstance').andReturn(action);
       spyOn(ResponseSelector, 'getUploadedBundleId').andReturn('test');
-      spyOn(StreamsRestUtils.asyncSubmissions, 'submitJobAsync').andReturn(action);
+      spyOn(StreamsRestUtils.submit, 'submitJob').andReturn(action);
       spyOn(ResponseSelector, 'getSubmitInfo').andReturn('test');
       spyOn(StatusUtils, 'jobSubmitted').andReturn(1);
       const state = getState$(store);
@@ -256,7 +256,7 @@ describe('async submission epics', () => {
         throw new Error();
       });
       spyOn(ResponseSelector, 'getUploadedBundleId').andReturn('test');
-      spyOn(StreamsRestUtils.asyncSubmissions, 'submitJobAsync').andReturn(action);
+      spyOn(StreamsRestUtils.submit, 'submitJob').andReturn(action);
       spyOn(ResponseSelector, 'getSubmitInfo').andReturn('test');
       spyOn(StatusUtils, 'jobSubmitted').andReturn(1);
       const state = getState$(store);
@@ -283,7 +283,7 @@ describe('async submission epics', () => {
       spyOn(ResponseSelector, 'getUploadedBundleId').andCallFake(() => {
         throw new Error();
       });
-      spyOn(StreamsRestUtils.asyncSubmissions, 'submitJobAsync').andReturn(action);
+      spyOn(StreamsRestUtils.submit, 'submitJob').andReturn(action);
       spyOn(ResponseSelector, 'getSubmitInfo').andReturn('test');
       spyOn(StatusUtils, 'jobSubmitted').andReturn(1);
       const state = getState$(store);
@@ -300,7 +300,7 @@ describe('async submission epics', () => {
           expect(output).toEqual(expectedOutput);
         });
     });
-    it('should handle failure if StreamsRestUtils.asyncSubmissions.submitJob fails', () => {
+    it('should handle failure if StreamsRestUtils.submit.submitJob fails', () => {
       const action = ActionsObservable.of({
         type: actions.actions.SUBMIT_APPLICATIONS_FROM_BUNDLE_FILES,
         bundles: [{ bundlePath: 'testing' }],
@@ -308,7 +308,7 @@ describe('async submission epics', () => {
       spyOn(StatusUtils, 'submitJobStart').andReturn(1);
       spyOn(StreamsRestUtils.artifact, 'uploadApplicationBundleToInstance').andReturn(action);
       spyOn(ResponseSelector, 'getUploadedBundleId').andReturn('test');
-      spyOn(StreamsRestUtils.asyncSubmissions, 'submitJobAsync').andCallFake(() => {
+      spyOn(StreamsRestUtils.submit, 'submitJob').andCallFake(() => {
         throw new Error();
       });
       spyOn(ResponseSelector, 'getSubmitInfo').andReturn('test');
@@ -335,7 +335,7 @@ describe('async submission epics', () => {
       spyOn(StatusUtils, 'submitJobStart').andReturn(1);
       spyOn(StreamsRestUtils.artifact, 'uploadApplicationBundleToInstance').andReturn(action);
       spyOn(ResponseSelector, 'getUploadedBundleId').andReturn('test');
-      spyOn(StreamsRestUtils.asyncSubmissions, 'submitJobAsync').andReturn(action);
+      spyOn(StreamsRestUtils.submit, 'submitJob').andReturn(action);
       spyOn(ResponseSelector, 'getSubmitInfo').andCallFake(() => {
         throw new Error();
       });
@@ -362,7 +362,7 @@ describe('async submission epics', () => {
       spyOn(StatusUtils, 'submitJobStart').andReturn(1);
       spyOn(StreamsRestUtils.artifact, 'uploadApplicationBundleToInstance').andReturn(action);
       spyOn(ResponseSelector, 'getUploadedBundleId').andReturn('test');
-      spyOn(StreamsRestUtils.asyncSubmissions, 'submitJobAsync').andReturn(action);
+      spyOn(StreamsRestUtils.submit, 'submitJob').andReturn(action);
       spyOn(ResponseSelector, 'getSubmitInfo').andReturn('test');
       spyOn(StatusUtils, 'jobSubmitted').andCallFake(() => {
         throw new Error();

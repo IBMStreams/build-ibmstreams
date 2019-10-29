@@ -6,8 +6,7 @@
 import * as path from 'path';
 import MessageHandler from '../../lib/MessageHandler';
 
-import SourceArchiveUtils from '../../lib/util/source-archive-utils';
-import MessageHandlerRegistry from '../../lib/message-handler-registry';
+import { SourceArchiveUtils, MessageHandlerRegistry } from '../../lib/modules';
 
 describe('source-archive-utils', () => {
   const toolkitsPath = `${__dirname}${path.sep}..${path.sep}BuildTest${path.sep}BuildSourceArchive${path.sep}toolkits${path.sep}streamsx.inet-2.9.6`;

@@ -4,20 +4,19 @@ import { createEpicMiddleware, ActionsObservable } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import * as operators from 'rxjs/operators';
 import { createStore, applyMiddleware } from 'redux';
-import rootEpic from '../../lib/epics/index';
-import * as actions from '../../lib/actions/index';
-import rootReducer from '../../lib/reducers/index';
-import MessageHandler from '../../lib/MessageHandler';
-import MessageHandlerRegistry from '../../lib/message-handler-registry';
 import {
-  StateSelector,
+  rootEpic,
+  rootReducer,
+  MessageHandlerRegistry,
   ResponseSelector,
   StreamsRestUtils,
-  SourceArchiveUtils,
-  StatusUtils,
   StreamsToolkitsUtils,
+  StatusUtils,
+  SourceArchiveUtils,
   KeychainUtils
-} from '../../lib/util';
+} from '../../lib/modules';
+import * as actions from '../../lib/actions/index';
+import MessageHandler from '../../lib/MessageHandler';
 
 function getState$(store) {
   return new Observable(((observer) => {

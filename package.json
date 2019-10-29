@@ -9,6 +9,7 @@
   "scripts": {
     "remotedev": "remotedev --hostname=localhost --port=8000",
     "lint": "eslint **/*.js --ignore-pattern node_modules/ --quiet",
+    "lint-clean": "eslint **/*.js --ignore-pattern node_modules/ --quiet --fix",
     "pretest": "atom --test spec/preTest.js",
     "test": "atom -t spec/ || atom --test spec/postTest.js",
     "posttest": "atom --test spec/postTest.js"
@@ -69,6 +70,7 @@
     "react-redux": "^7.0.1",
     "react-select": "^3.0.8",
     "redux": "^4.0.1",
+    "redux-immutable": "^4.0.0",
     "redux-observable": "^1.1.0",
     "request": "^2.88.0",
     "reselect": "^4.0.0",

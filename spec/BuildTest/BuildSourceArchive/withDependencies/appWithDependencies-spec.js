@@ -5,8 +5,7 @@ import * as path from 'path';
 import * as JSZip from 'jszip';
 import * as fs from 'fs';
 import MessageHandler from '../../../../lib/MessageHandler';
-import SourceArchiveUtils from '../../../../lib/util/source-archive-utils';
-import MessageHandlerRegistry from '../../../../lib/message-handler-registry';
+import { SourceArchiveUtils, MessageHandlerRegistry } from '../../../../lib/modules';
 /* eslint compat/compat: 0 */
 
 function getFiles(dir, mainDir, folder, files_) {
