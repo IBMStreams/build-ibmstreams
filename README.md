@@ -35,3 +35,7 @@ If you need to provision an add-on, start [here](https://www.ibm.com/support/kno
 
 ### SPL Application build
 ![](./images/build.gif)
+
+### Troubleshooting
+
+* If while installing the package a keytar installation error appeared, try installing MSVC build tools 14
